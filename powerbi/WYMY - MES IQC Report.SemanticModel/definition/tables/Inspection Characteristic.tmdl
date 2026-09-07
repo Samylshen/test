@@ -1,0 +1,78 @@
+/// Master inspection characteristic (MIC) with specification limits.
+table 'Inspection Characteristic'
+	lineageTag: 584c498b-2469-4267-98ce-78b1e5c39f2a
+
+	column CharacteristicKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: f904913c-ef1c-43bf-b3fc-134ff61e9b45
+		summarizeBy: none
+		sourceColumn: CharacteristicKey
+
+	column CharacteristicCode
+		dataType: string
+		lineageTag: 6bf0e975-eba5-42d5-98dd-52c16f96bed1
+		summarizeBy: none
+		sourceColumn: CharacteristicCode
+
+	column CharacteristicName
+		dataType: string
+		lineageTag: 52e8d6d3-6dd7-475f-8813-f90263c7377a
+		summarizeBy: none
+		sourceColumn: CharacteristicName
+
+	column CharacteristicGroup
+		dataType: string
+		lineageTag: 1a2e0029-863b-41ae-afa8-232a8ad46eea
+		summarizeBy: none
+		sourceColumn: CharacteristicGroup
+
+	/// Quantitative or Qualitative.
+	column CharacteristicType
+		dataType: string
+		lineageTag: 430e46d3-322f-45ff-9572-27786acfc818
+		summarizeBy: none
+		sourceColumn: CharacteristicType
+
+	column UoM
+		dataType: string
+		lineageTag: 3ffa712a-407c-4318-b2c4-f23f4a07fae9
+		summarizeBy: none
+		sourceColumn: UoM
+
+	column LowerSpecLimit
+		dataType: double
+		formatString: #,##0.00
+		lineageTag: 901cecf7-68f6-402d-9b68-02a1d4fd9a64
+		summarizeBy: none
+		sourceColumn: LowerSpecLimit
+
+	column UpperSpecLimit
+		dataType: double
+		formatString: #,##0.00
+		lineageTag: 21435aa1-c58c-4cbd-ac92-23278d9c6d44
+		summarizeBy: none
+		sourceColumn: UpperSpecLimit
+
+	column TargetValue
+		dataType: double
+		formatString: #,##0.00
+		lineageTag: 8e6b08e2-1bcb-45e4-a31e-effabdab4853
+		summarizeBy: none
+		sourceColumn: TargetValue
+
+	column IsCritical
+		dataType: boolean
+		lineageTag: a72549ac-27e5-4bb2-a44e-9766eb9a7cff
+		summarizeBy: none
+		sourceColumn: IsCritical
+
+	partition 'Inspection Characteristic' = entity
+		mode: directLake
+		source
+			entityName: dim_inspection_characteristic
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table

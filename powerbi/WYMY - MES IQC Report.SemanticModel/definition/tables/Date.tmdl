@@ -1,0 +1,119 @@
+/// Date dimension (marked as date table). Must be a physical Delta table in the Lakehouse - Direct Lake does not support DAX calculated date tables.
+table 'Date'
+	lineageTag: c41ee29e-aa08-47e8-a4a2-b7d0b59d1135
+	dataCategory: Time
+
+	/// Surrogate key (yyyyMMdd). Join key for all fact date roles.
+	column DateKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 4c19b8c9-6fa7-47ed-98f8-6a43b5085705
+		summarizeBy: none
+		sourceColumn: DateKey
+
+	/// Calendar date. Key column used to mark this table as the model date table.
+	column Date
+		dataType: dateTime
+		isKey: true
+		formatString: Short Date
+		lineageTag: e30b2b4d-4555-4fba-a43f-28a3f7ced63e
+		summarizeBy: none
+		sourceColumn: Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: ef407a42-3a68-439b-bc7d-019eb3611d11
+		summarizeBy: none
+		sourceColumn: Year
+
+	column QuarterNumber
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 3af639ef-3f02-4b0c-98aa-9d8a65119d2d
+		summarizeBy: none
+		sourceColumn: QuarterNumber
+
+	column Quarter
+		dataType: string
+		lineageTag: 592276bf-e6f5-450f-a2a0-ac0bd7cf7705
+		sortByColumn: QuarterNumber
+		summarizeBy: none
+		sourceColumn: Quarter
+
+	column MonthNumber
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 6ce34103-7432-4011-82bb-a7f74e7d4021
+		summarizeBy: none
+		sourceColumn: MonthNumber
+
+	/// Month short name, sorted by MonthNumber.
+	column Month
+		dataType: string
+		lineageTag: bf70bc0c-19f9-4ba1-9b27-c4afd74218df
+		sortByColumn: MonthNumber
+		summarizeBy: none
+		sourceColumn: Month
+
+	/// yyyy-MM label for trend axes.
+	column YearMonth
+		dataType: string
+		lineageTag: cc7f4702-d22c-479f-be78-3c5a6bf6027c
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+	column YearMonthNumber
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 5bb4d4b1-861d-484b-9064-be760b605a25
+		summarizeBy: none
+		sourceColumn: YearMonthNumber
+
+	column WeekOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e8a8504-f6ac-4b71-8205-e085262859ef
+		summarizeBy: none
+		sourceColumn: WeekOfYear
+
+	column YearWeek
+		dataType: string
+		lineageTag: 8b620210-efe3-4bfb-8b5a-684f80070495
+		summarizeBy: none
+		sourceColumn: YearWeek
+
+	column DayOfWeekNumber
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 3ec45dd8-148c-4282-b3c5-726f81c1a4c4
+		summarizeBy: none
+		sourceColumn: DayOfWeekNumber
+
+	column DayOfWeek
+		dataType: string
+		lineageTag: 930c5835-8381-42ca-96ac-2f1a96b91936
+		sortByColumn: DayOfWeekNumber
+		summarizeBy: none
+		sourceColumn: DayOfWeek
+
+	/// TRUE for Mon-Fri excluding plant holidays.
+	column IsWorkday
+		dataType: boolean
+		lineageTag: 32fafe20-4d64-4785-acbb-04bca18aaa26
+		summarizeBy: none
+		sourceColumn: IsWorkday
+
+	partition 'Date' = entity
+		mode: directLake
+		source
+			entityName: dim_date
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table

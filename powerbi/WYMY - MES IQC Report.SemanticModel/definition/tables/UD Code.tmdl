@@ -1,0 +1,73 @@
+/// Usage decision (UD) code master from ERP QA11. Drives the pass/fail split and the follow-up action after inspection.
+table 'UD Code'
+	lineageTag: 7b9ececa-e428-4647-98c2-3240ca90cb85
+
+	column UDCodeKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: ddaa0196-da4a-42d3-bac6-4a6c8145b472
+		summarizeBy: none
+		sourceColumn: UDCodeKey
+
+	column UDCode
+		dataType: string
+		lineageTag: 2a30819c-68ce-4b7d-8e6c-90715d110ee1
+		summarizeBy: none
+		sourceColumn: UDCode
+
+	column UDCodeGroup
+		dataType: string
+		lineageTag: bc31bd98-4cd3-4fe3-b5b3-4f674f27a358
+		summarizeBy: none
+		sourceColumn: UDCodeGroup
+
+	column UDDescription
+		dataType: string
+		lineageTag: 996de02b-049d-4ba6-8a60-13a419e5a2da
+		summarizeBy: none
+		sourceColumn: UDDescription
+
+	/// Pending / Pass / Fail / Partial.
+	column UDDecision
+		dataType: string
+		lineageTag: d671e740-eeca-4660-9fa0-205b4fb2b733
+		sortByColumn: UDDecisionSortOrder
+		summarizeBy: none
+		sourceColumn: UDDecision
+
+	column UDDecisionSortOrder
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: c5d1fd00-9690-4484-a2de-e70b65989533
+		summarizeBy: none
+		sourceColumn: UDDecisionSortOrder
+
+	/// Putaway / Quarantine (Y105-Y106) / Scrap / Return to Vendor / Repair.
+	column FollowUpAction
+		dataType: string
+		lineageTag: ecec6e31-5730-40f6-8cb5-bf124369ee85
+		summarizeBy: none
+		sourceColumn: FollowUpAction
+
+	column IsPass
+		dataType: boolean
+		lineageTag: 618697be-699e-42bb-9c8b-03906ef2ac63
+		summarizeBy: none
+		sourceColumn: IsPass
+
+	column IsFail
+		dataType: boolean
+		lineageTag: e04b5d9a-ae6d-43fe-a904-2940645ede7b
+		summarizeBy: none
+		sourceColumn: IsFail
+
+	partition 'UD Code' = entity
+		mode: directLake
+		source
+			entityName: dim_ud_code
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table

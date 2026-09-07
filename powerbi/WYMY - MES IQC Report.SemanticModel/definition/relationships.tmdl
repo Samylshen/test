@@ -1,0 +1,52 @@
+/// Goods receipt date - the active date role.
+relationship 78203d04-e9f1-4286-81ad-ce23405f5be6
+	fromColumn: 'Inspection Lot'.GRDateKey
+	toColumn: 'Date'.DateKey
+
+/// Usage decision date - inactive, activated with USERELATIONSHIP in the UD-date measures.
+relationship ed34a564-7735-4529-a6f2-79223f96bb3e
+	isActive: false
+	fromColumn: 'Inspection Lot'.UDDateKey
+	toColumn: 'Date'.DateKey
+
+relationship 03c75b62-bd58-430d-ad52-12d9b2eeca86
+	fromColumn: 'Inspection Lot'.MaterialKey
+	toColumn: Material.MaterialKey
+
+relationship ee24826d-aab3-4c3e-a672-9a125b20b698
+	fromColumn: 'Inspection Lot'.VendorKey
+	toColumn: Vendor.VendorKey
+
+relationship f63e882d-b6ae-4c5b-a50a-ff83dd6f10ea
+	fromColumn: 'Inspection Lot'.BatchKey
+	toColumn: Batch.BatchKey
+
+relationship e1848346-7a0a-4260-96da-123fca369036
+	fromColumn: 'Inspection Lot'.PlantKey
+	toColumn: Plant.PlantKey
+
+relationship 8049f480-e992-420a-926b-a1aeca16b38f
+	fromColumn: 'Inspection Lot'.UDCodeKey
+	toColumn: 'UD Code'.UDCodeKey
+
+/// Header to detail: the lot fact filters the characteristic results.
+relationship a6f99136-b796-499a-9b01-3c2de17cf675
+	fromColumn: 'Inspection Result'.InspectionLotKey
+	toColumn: 'Inspection Lot'.InspectionLotKey
+
+/// Header to detail: the lot fact filters the recorded defects.
+relationship a5879e69-c4f5-46ba-b892-449198f91ccd
+	fromColumn: 'Inspection Defect'.InspectionLotKey
+	toColumn: 'Inspection Lot'.InspectionLotKey
+
+relationship 32535cb9-99b2-49fe-80f3-e38f921a21bd
+	fromColumn: 'Inspection Result'.CharacteristicKey
+	toColumn: 'Inspection Characteristic'.CharacteristicKey
+
+relationship 2bde7972-7878-4fa9-abb3-3813d03bf8a4
+	fromColumn: 'Inspection Defect'.CharacteristicKey
+	toColumn: 'Inspection Characteristic'.CharacteristicKey
+
+relationship b8a0b01b-20e9-43ce-b73b-ae1cdd25933e
+	fromColumn: 'Inspection Defect'.DefectCodeKey
+	toColumn: 'Defect Code'.DefectCodeKey

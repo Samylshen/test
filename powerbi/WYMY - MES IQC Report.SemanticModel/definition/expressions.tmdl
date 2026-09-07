@@ -1,0 +1,12 @@
+/// Direct Lake on OneLake connection to the Fabric Lakehouse that holds the Gold-layer IQC
+/// tables. Replace the two placeholder GUIDs per environment - the first is the workspace ID,
+/// the second is the Lakehouse (or Warehouse) ID. Keep them as literal GUIDs rather than M
+/// parameters, otherwise Edit tables and refresh stop working in Power BI Desktop and the web.
+expression DatabaseQuery = ```
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/00000000-0000-0000-0000-000000000000/11111111-1111-1111-1111-111111111111")
+		in
+		    Source
+		```
+	lineageTag: 79bc8900-b624-440d-a9c1-698938fb3aa6
+	annotation PBI_IncludeFutureArtifacts = False
