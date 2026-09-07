@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "WYMY - MES IQC Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b98c88e0-41ee-4470-ab75-f9abbbc56309"
+  }
+}

@@ -1,0 +1,56 @@
+/// Supplier master. Primary grouping dimension for incoming quality scorecards.
+table Vendor
+	lineageTag: e28af2f5-a559-4d23-ba32-73cac9b957f7
+
+	column VendorKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: e366f310-c184-488d-adad-d3d5bacf6663
+		summarizeBy: none
+		sourceColumn: VendorKey
+
+	column VendorNumber
+		dataType: string
+		lineageTag: 8824b04d-8d55-4a65-8d46-517f67393db8
+		summarizeBy: none
+		sourceColumn: VendorNumber
+
+	column VendorName
+		dataType: string
+		lineageTag: 7f84462f-76db-48c0-91f6-9424d66ba80a
+		summarizeBy: none
+		sourceColumn: VendorName
+
+	column VendorGroup
+		dataType: string
+		lineageTag: 56980f07-4b19-4f63-9d20-97b08f0e7b84
+		summarizeBy: none
+		sourceColumn: VendorGroup
+
+	column VendorCountry
+		dataType: string
+		lineageTag: a83e7eba-290a-44a2-9a4d-ce73852a6772
+		summarizeBy: none
+		sourceColumn: VendorCountry
+
+	column VendorRegion
+		dataType: string
+		lineageTag: f0006b7c-7697-4d0e-8921-f7db55289f96
+		summarizeBy: none
+		sourceColumn: VendorRegion
+
+	column IsApprovedVendor
+		dataType: boolean
+		lineageTag: f1b77fdc-d8fb-4c72-b04f-e61837671d2c
+		summarizeBy: none
+		sourceColumn: IsApprovedVendor
+
+	partition Vendor = entity
+		mode: directLake
+		source
+			entityName: dim_vendor
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table

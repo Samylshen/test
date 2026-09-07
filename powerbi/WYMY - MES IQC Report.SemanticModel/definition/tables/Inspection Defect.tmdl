@@ -1,0 +1,92 @@
+/// Detail fact at one row per inspection lot and defect code, including the disposition decided after a failing usage decision.
+table 'Inspection Defect'
+	lineageTag: 4b8c77af-3c5e-4fb9-a04f-e0d75cad3440
+
+	column InspectionDefectKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 626da0f9-e0d5-428f-9bd9-e1440cfddbb1
+		summarizeBy: none
+		sourceColumn: InspectionDefectKey
+
+	column InspectionLotKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 67db4b0b-5308-42ca-851c-f63a7e586a97
+		summarizeBy: none
+		sourceColumn: InspectionLotKey
+
+	column DefectCodeKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: fd04c599-8b54-499b-bce1-04ad3ee9fc6a
+		summarizeBy: none
+		sourceColumn: DefectCodeKey
+
+	column CharacteristicKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: e6f4e371-0ba0-4573-9f4e-28d01c6bb9b1
+		summarizeBy: none
+		sourceColumn: CharacteristicKey
+
+	column DefectQuantity
+		dataType: double
+		formatString: #,##0.00
+		lineageTag: ee933b1c-49f4-4834-95d4-5acc684f8080
+		summarizeBy: sum
+		sourceColumn: DefectQuantity
+
+	column DefectCount
+		dataType: int64
+		formatString: #,##0
+		lineageTag: b4713cfb-b9ad-4cc0-b897-1d9cb060a093
+		summarizeBy: sum
+		sourceColumn: DefectCount
+
+	/// Scrap / Return to Vendor / Repair / Use As Is / Sort.
+	column Disposition
+		dataType: string
+		lineageTag: 1f502a07-3aa2-4a39-8714-cc27682b0be6
+		summarizeBy: none
+		sourceColumn: Disposition
+
+	/// Approver recorded in BPM; empty while the approval is still pending (GAP-IQC-03).
+	column DispositionApprovedBy
+		dataType: string
+		lineageTag: fefb882b-e932-4c17-a9cc-f1ce1d46bba9
+		summarizeBy: none
+		sourceColumn: DispositionApprovedBy
+
+	/// Vendor / Internal / Logistics.
+	column ResponsibleParty
+		dataType: string
+		lineageTag: 5bca7793-c119-4edc-bc4a-213c5dd10313
+		summarizeBy: none
+		sourceColumn: ResponsibleParty
+
+	column DefectTimestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a088200d-d35e-48b7-86f4-4936d3537c1e
+		summarizeBy: none
+		sourceColumn: DefectTimestamp
+
+	column Remark
+		dataType: string
+		lineageTag: c7dee3a5-5a18-4b75-aa67-15131124f6bb
+		summarizeBy: none
+		sourceColumn: Remark
+
+	partition 'Inspection Defect' = entity
+		mode: directLake
+		source
+			entityName: fact_inspection_defect
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table

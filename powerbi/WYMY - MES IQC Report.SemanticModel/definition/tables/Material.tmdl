@@ -1,0 +1,91 @@
+/// Raw material master (PN level), including the PACI classification that drives the putaway storage type.
+table Material
+	lineageTag: 74e359cf-4a39-4d48-8dcf-395a0fc9b519
+
+	column MaterialKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 26aa9bd9-aa62-41d3-8053-54e08a424477
+		summarizeBy: none
+		sourceColumn: MaterialKey
+
+	/// Wiwynn part number, e.g. B34.12345.6789.
+	column MaterialNumber
+		dataType: string
+		lineageTag: 6baf61fe-fb45-43fa-8ac3-a3fdff9342f2
+		summarizeBy: none
+		sourceColumn: MaterialNumber
+
+	column MaterialDescription
+		dataType: string
+		lineageTag: 93e79a1b-f026-4f65-a896-e22ad316ef07
+		summarizeBy: none
+		sourceColumn: MaterialDescription
+
+	column MaterialType
+		dataType: string
+		lineageTag: e2516381-2585-4e33-97ab-c1fe87727842
+		summarizeBy: none
+		sourceColumn: MaterialType
+
+	column MaterialGroup
+		dataType: string
+		lineageTag: 74086111-25a0-47e5-938f-cf5025e6f4a8
+		summarizeBy: none
+		sourceColumn: MaterialGroup
+
+	/// PACI classification: HV / L10 / L11 / L11 Raw Rack / GPS. Drives the target storage type.
+	column PACIClass
+		dataType: string
+		lineageTag: 0f39da55-4b8c-4584-85c5-84e1a330d9fd
+		summarizeBy: none
+		sourceColumn: PACIClass
+
+	/// Putaway target storage type derived from PACI (HPR1 / SPR1 / EPR1 / ERR1 / GPSM).
+	column TargetStorageType
+		dataType: string
+		lineageTag: bfc1ca0f-5b04-41a4-86d6-d969f3771e79
+		summarizeBy: none
+		sourceColumn: TargetStorageType
+
+	column KeeperCode
+		dataType: string
+		lineageTag: 13022a9d-61be-4258-ad9b-eb4c6d228180
+		summarizeBy: none
+		sourceColumn: KeeperCode
+
+	column CountryOfOrigin
+		dataType: string
+		lineageTag: b4c54f85-9ba4-4698-a832-4315a8ca67c4
+		summarizeBy: none
+		sourceColumn: CountryOfOrigin
+
+	column BaseUoM
+		dataType: string
+		lineageTag: 5cc83ded-3c6e-4d04-9842-c419bee29141
+		summarizeBy: none
+		sourceColumn: BaseUoM
+
+	/// TRUE for HV parts (HV raw receiving 9011 -> HPR1).
+	column IsHighValue
+		dataType: boolean
+		lineageTag: d2cc85ce-a47a-4881-af72-87fb0bc95c43
+		summarizeBy: none
+		sourceColumn: IsHighValue
+
+	/// TRUE when the material triggers an inspection lot at goods receipt.
+	column IsInspectionRelevant
+		dataType: boolean
+		lineageTag: 09444bf6-0037-4578-ad17-1ae4ea443c2d
+		summarizeBy: none
+		sourceColumn: IsInspectionRelevant
+
+	partition Material = entity
+		mode: directLake
+		source
+			entityName: dim_material
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table

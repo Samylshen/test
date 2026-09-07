@@ -1,0 +1,67 @@
+/// Defect code catalogue with severity classification.
+table 'Defect Code'
+	lineageTag: feb0d0cf-6001-4479-97f2-dd4c7999ab87
+
+	column DefectCodeKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: d5131849-e465-4c7d-b569-d15c96966d89
+		summarizeBy: none
+		sourceColumn: DefectCodeKey
+
+	column DefectCode
+		dataType: string
+		lineageTag: e2d9a203-1d09-4d6b-8510-943a7084b239
+		summarizeBy: none
+		sourceColumn: DefectCode
+
+	column DefectCodeGroup
+		dataType: string
+		lineageTag: ecc6c2b4-d02c-48e0-b120-8a2ac876e540
+		summarizeBy: none
+		sourceColumn: DefectCodeGroup
+
+	column DefectDescription
+		dataType: string
+		lineageTag: 4684a620-05e3-45fb-8dbb-9e36b905eb6a
+		summarizeBy: none
+		sourceColumn: DefectDescription
+
+	/// Appearance / Dimension / Function / Packaging / Label / Documentation.
+	column DefectCategory
+		dataType: string
+		lineageTag: bcb3baf0-bd26-4fe6-b808-dfe07685c85f
+		summarizeBy: none
+		sourceColumn: DefectCategory
+
+	/// Critical / Major / Minor.
+	column Severity
+		dataType: string
+		lineageTag: cedaa503-15fc-4c95-b090-4fd257c950f9
+		sortByColumn: SeveritySortOrder
+		summarizeBy: none
+		sourceColumn: Severity
+
+	column SeveritySortOrder
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 151a9ed5-aa52-4a7a-b4ba-36643b13701a
+		summarizeBy: none
+		sourceColumn: SeveritySortOrder
+
+	column IsCritical
+		dataType: boolean
+		lineageTag: b2c03f86-3d2f-4edc-bf49-f18ce2444566
+		summarizeBy: none
+		sourceColumn: IsCritical
+
+	partition 'Defect Code' = entity
+		mode: directLake
+		source
+			entityName: dim_defect_code
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table

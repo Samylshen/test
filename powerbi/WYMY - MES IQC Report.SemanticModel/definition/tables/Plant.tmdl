@@ -1,0 +1,65 @@
+/// Plant / site / EWM warehouse dimension (US1 SLC, US2 Rojas).
+table Plant
+	lineageTag: a739984f-a29b-494d-b205-453670ceea16
+
+	column PlantKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: c342c622-a591-4910-87fc-0f5a857c376a
+		summarizeBy: none
+		sourceColumn: PlantKey
+
+	column PlantCode
+		dataType: string
+		lineageTag: 83e595c6-ae84-4c67-b467-1f6d840af7e8
+		summarizeBy: none
+		sourceColumn: PlantCode
+
+	column PlantName
+		dataType: string
+		lineageTag: f6c17234-fe38-4c23-ba36-d2d5f2e0de49
+		summarizeBy: none
+		sourceColumn: PlantName
+
+	/// US1 / US2.
+	column SiteCode
+		dataType: string
+		lineageTag: 90bb76f9-60e8-4d60-a508-2b9bee5949cc
+		summarizeBy: none
+		sourceColumn: SiteCode
+
+	/// SLC / Rojas.
+	column SiteName
+		dataType: string
+		lineageTag: 8d7ac4d1-5dd7-434f-ba11-386cacd91cab
+		summarizeBy: none
+		sourceColumn: SiteName
+
+	/// EWM warehouse number.
+	column WarehouseNumber
+		dataType: string
+		lineageTag: 2bc25a08-a8bc-4af2-88cb-49957d8e6df7
+		summarizeBy: none
+		sourceColumn: WarehouseNumber
+
+	column Country
+		dataType: string
+		lineageTag: 9097e5f8-1c22-44e2-9ce8-06274f161d56
+		summarizeBy: none
+		sourceColumn: Country
+
+	column Region
+		dataType: string
+		lineageTag: 2e814331-a627-4566-90fa-80c941634c1d
+		summarizeBy: none
+		sourceColumn: Region
+
+	partition Plant = entity
+		mode: directLake
+		source
+			entityName: dim_plant
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table

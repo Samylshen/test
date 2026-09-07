@@ -1,0 +1,131 @@
+/// Detail fact at one row per inspection lot and measured characteristic. Filtered through the Inspection Lot header, so all lot-level dimensions apply.
+table 'Inspection Result'
+	lineageTag: d880e52f-b0a7-4781-bea0-8ad47849ea6b
+
+	column InspectionResultKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: b40192cd-77b3-4d73-a28c-088a2f6c6b66
+		summarizeBy: none
+		sourceColumn: InspectionResultKey
+
+	column InspectionLotKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 30de75ad-5851-40f0-acd3-c4797e39a6b7
+		summarizeBy: none
+		sourceColumn: InspectionLotKey
+
+	column CharacteristicKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: 88709f13-abf5-491e-a4e2-a4c2fae39908
+		summarizeBy: none
+		sourceColumn: CharacteristicKey
+
+	column SampleNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 8b4e3835-576f-4fcc-84e2-333fe2243f3e
+		summarizeBy: none
+		sourceColumn: SampleNumber
+
+	column SampleSize
+		dataType: int64
+		formatString: #,##0
+		lineageTag: 5e8e9bf6-1b84-4966-8aa2-dc51f320d36d
+		summarizeBy: sum
+		sourceColumn: SampleSize
+
+	column InspectedUnits
+		dataType: int64
+		formatString: #,##0
+		lineageTag: 9b97b216-f72a-4e4c-b4e5-594b653f80c0
+		summarizeBy: sum
+		sourceColumn: InspectedUnits
+
+	column NonConformingUnits
+		dataType: int64
+		formatString: #,##0
+		lineageTag: 2ee3f3f5-deeb-49b4-8cb9-a58c026383c0
+		summarizeBy: sum
+		sourceColumn: NonConformingUnits
+
+	column MeasuredValue
+		dataType: double
+		formatString: #,##0.00
+		lineageTag: 03944e3b-00ce-43bc-8d6f-0084e1f5188e
+		summarizeBy: none
+		sourceColumn: MeasuredValue
+
+	column MeanValue
+		dataType: double
+		formatString: #,##0.00
+		lineageTag: a3d9953a-feca-4c84-ae2d-6fb7f252987a
+		summarizeBy: none
+		sourceColumn: MeanValue
+
+	column MinValue
+		dataType: double
+		formatString: #,##0.00
+		lineageTag: 8cab5225-6f05-4016-b11d-2fcd9f60f2d8
+		summarizeBy: none
+		sourceColumn: MinValue
+
+	column MaxValue
+		dataType: double
+		formatString: #,##0.00
+		lineageTag: d2363a42-2a19-42d4-86ab-cb02a756d427
+		summarizeBy: none
+		sourceColumn: MaxValue
+
+	column UoM
+		dataType: string
+		lineageTag: 318cfd12-c3a0-49fb-ae6c-86d2a5096b6d
+		summarizeBy: none
+		sourceColumn: UoM
+
+	/// Accepted or Rejected, as recorded in MES.
+	column Valuation
+		dataType: string
+		lineageTag: b6bc46ed-8645-45b2-9230-ae21ec1741dd
+		summarizeBy: none
+		sourceColumn: Valuation
+
+	column IsRejected
+		dataType: boolean
+		lineageTag: 492c86fd-5aa1-4a97-8192-090f2a5e06fb
+		summarizeBy: none
+		sourceColumn: IsRejected
+
+	/// TRUE when the measured value sits between the lower and upper spec limits.
+	column IsWithinSpec
+		dataType: boolean
+		lineageTag: 8f011e73-cd21-42a5-b8f5-c0e6460b8d10
+		summarizeBy: none
+		sourceColumn: IsWithinSpec
+
+	column Inspector
+		dataType: string
+		lineageTag: 3490218b-bd3c-41bf-822e-bbfc1a7f9d85
+		summarizeBy: none
+		sourceColumn: Inspector
+
+	column ResultTimestamp
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 29cb0448-82ed-4f15-9342-1d94931254ea
+		summarizeBy: none
+		sourceColumn: ResultTimestamp
+
+	partition 'Inspection Result' = entity
+		mode: directLake
+		source
+			entityName: fact_inspection_result
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table

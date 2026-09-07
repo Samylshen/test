@@ -1,0 +1,68 @@
+/// Batch / lot master with shelf-life attributes. Batch status reflects the EWM stock type (Unrestricted / Quality inspection / Blocked).
+table Batch
+	lineageTag: 94f62875-d770-469f-82b3-f2f19f782666
+
+	column BatchKey
+		dataType: int64
+		isHidden: true
+		formatString: 0
+		lineageTag: b514be53-160a-449d-9a56-3a680a2d9f32
+		summarizeBy: none
+		sourceColumn: BatchKey
+
+	column BatchNumber
+		dataType: string
+		lineageTag: 3c19a22f-0dea-4126-bf26-6056d78a7741
+		summarizeBy: none
+		sourceColumn: BatchNumber
+
+	column MaterialNumber
+		dataType: string
+		isHidden: true
+		lineageTag: 9aa9921a-ce75-4145-b830-877c14e5660b
+		summarizeBy: none
+		sourceColumn: MaterialNumber
+
+	column ManufactureDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: ac994cc9-c555-4ca2-a635-f29c8dbc86d4
+		summarizeBy: none
+		sourceColumn: ManufactureDate
+
+	column ExpiryDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 032726df-1a5f-4a37-bcf4-04f7bb9bcd9f
+		summarizeBy: none
+		sourceColumn: ExpiryDate
+
+	column ShelfLifeDays
+		dataType: int64
+		formatString: 0
+		lineageTag: 5b3dfc6f-0cbc-4f39-bc8d-ada68fb8fc41
+		summarizeBy: none
+		sourceColumn: ShelfLifeDays
+
+	/// Unrestricted / Quality Inspection / Blocked.
+	column BatchStatus
+		dataType: string
+		lineageTag: c356003a-93bd-43dd-982e-a79b61b0e034
+		summarizeBy: none
+		sourceColumn: BatchStatus
+
+	/// TRUE while the batch is still in Q stock and not released.
+	column IsQualityStock
+		dataType: boolean
+		lineageTag: 8ca01155-8257-4b83-af3b-74dea9911334
+		summarizeBy: none
+		sourceColumn: IsQualityStock
+
+	partition Batch = entity
+		mode: directLake
+		source
+			entityName: dim_batch
+			schemaName: dbo
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
